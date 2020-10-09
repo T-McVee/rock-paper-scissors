@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+  <script>
+
+    function computerPlay() {
+      // Generate random number between 1-3
+      let num = Math.floor(Math.random() * 3) + 1;
+
+      // return string based on num 
+      return num == 1 ? 'rock'
+        : num == 2 ? 'paper'
+          : 'scissors';
+    }
+
+    function playRound(playerSelection, computerSelection) {
+      // convert player selection to all lowercase
+      let computer = computerSelection.slice(0);
+      let player = playerSelection.slice(0).toLowerCase();
+
+      // Determine result
+      return player === computerSelection ? "Looks like you've got yourself a tie"
+        : player == 'paper' && computer == 'scissors'
+          || player == 'scissors' && computer == 'rock'
+          || player == 'rock' && computer == 'paper'
+          ? `Oops, you lost, ${computer} beats ${player}`
+          : `Victory, ${player} beats ${computer}`
+    }
+
+    function incrementScore(result) {
+      return result.charAt(0) == 'V' ? 1
+        : result.charAt(0) == 'O' ? -1
+          : 0;
+    }
+
+    function game(numberOfGames) {
+      //Keep score count
+      let score = 0;
+
+      // Loop playRound a given number of times
+      for (let i = 0; i < numberOfGames; i++) {
+        // Get each players input
+        const playerSelection = prompt('Pick your weapon');
+        const computerSelection = computerPlay();
+
+        // Play round and increment score
+        let result = playRound(playerSelection, computerPlay());
+        score += incrementScore(result);
+
+        // log round result
+        console.log(result);
+      }
+
+      //return final result
+      return score > 0 ? 'Winner' : 'Looser!';
+    }
+
+
+
+    console.log(game(5));
+    //console.log(playRound(playerSelection, computerPlay()));
+  </script>
+</body>
+
+</html>
