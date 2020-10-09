@@ -18,7 +18,7 @@
           : 'scissors';
     }
 
-    // Run one round of Scissors Paper Rock
+    // One round of Scissors Paper Rock
     function playRound(playerSelection, computerSelection) {
       let computer = computerSelection.slice(0);
       let player = playerSelection.slice(0).toLowerCase();
@@ -31,21 +31,21 @@
           : `Victory, ${player} beats ${computer}`
     }
 
-    // Determine winner of multiple rounds
-    function game(numberOfGames) {
-      let score = runRounds(numberOfGames);
-      return score > 0 ? 'Winner' : 'Looser!';
+    // If player wins increase score by 1 if computer wins decrease score by 1
+    function incrementScore(result) {
+      return result.charAt(0) == 'V' ? 1
+        : result.charAt(0) == 'O' ? -1
+          : 0;
     }
 
-    // Track player's score of multiple rounds
-    function runRounds(numberOfGames) {
+    // Track player's score over multiple rounds
+    function runRounds(numberOfRounds) {
       let score = 0;
 
-      for (let i = 0; i < numberOfGames; i++) {
-        const playerSelection = prompt('Pick your weapon. Please type either "rock", "paper" or "scissors" and hit enter.');
-        const computerSelection = computerPlay();
-
-        // Play round
+      for (let i = 0; i < numberOfRounds; i++) {
+        const playerSelection = prompt(
+          'Pick your weapon. Please type either "rock", "paper" or "scissors" and hit enter.'
+        );
         let result = playRound(playerSelection, computerPlay());
         score += incrementScore(result);
         console.log(result);
@@ -53,12 +53,12 @@
       return score;
     }
 
-    // If player wins increase score by 1 if computer wins decrease score by 1
-    function incrementScore(result) {
-      return result.charAt(0) == 'V' ? 1
-        : result.charAt(0) == 'O' ? -1
-          : 0;
+    // Determine winner of multiple rounds
+    function game(numberOfRounds) {
+      let score = runRounds(numberOfRounds);
+      return score > 0 ? 'Winner' : 'Looser!';
     }
+
 
     console.log(game(5));
   </script>
