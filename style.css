@@ -1,0 +1,125 @@
+body {
+  background: #a4d1ed;
+  color: #4d4d4d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.title h1 {
+  margin: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.title span {
+  margin: 0 0 1em 0;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+}
+
+.game {
+  width: 800px;
+  background:#fafafa51;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 2em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid #4d4d4d2c;
+}
+
+.btn {
+  width: 150px;
+  text-decoration: none;
+  text-align: center;
+  list-style: none;
+  padding: 1em 1em;
+  margin: 0.5em 1em;
+  background: rgba(255, 255, 255, 0.50);
+  border-radius: 8px;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+  color: #e19357;
+  cursor: pointer;
+}
+
+.outputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.outputs .output {
+  margin: 0.5em 0.5em;
+  font-size: 1.5em;
+}
+
+.end {
+  color: #e19357;
+  font-weight: bold;
+}
+
+.outputs .selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.outputs .selection .output {
+  flex-direction: column;
+  text-transform: uppercase;
+  width: 50%;
+  text-align: center;
+  margin: 0 2em 1em;
+}
+
+.block {
+  display: block;
+}
+
+
+
+
+
+
+
+
+

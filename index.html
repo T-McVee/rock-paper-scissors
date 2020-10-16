@@ -4,11 +4,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Rock Paper Scissors</title>
 </head>
 
 <body>
+  <div class="container">
+    <div class="title">
+      <h1>Scissors. Paper. Rock</h1>
+      <span>Pick your weapon to begin</span>
+    </div>
+    <div class="game">
+      <ul class="buttons">
+        <li class="btn" id="rock">Rock</li>
+        <li class="btn" id="paper">Paper</li>
+        <li class="btn" id="scissors">Scissors</li>
+      </ul>
+      <div class="outputs">
+        <div class="selection" id="players">
+          <div class="output">
+            <span class="block">Player: </span><span class="block" id="player">...</span>
+          </div>
+          <div class="output">
+            <span class="block">Computer: </span><span class="block" id="computer">???</span>
+          </div>
+        </div>
+        <div class="output" id="message">Will you defeate the mighty AI?</div>
+        <div class="output score">
+          <span id="players-score">0</span>:<span id="computers-score">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
   <script>
+    // Buttons
+    const buttons = document.querySelectorAll('.btn');
+    const playerOutput = document.querySelector('#player');
+    const computerOutput = document.querySelector('#computer');
+    const message = document.querySelector('#message');
+    const playersScore = document.querySelector('#players-score');
+    const computersScore = document.querySelector('#computers-score');
+
     // Generate computer player's choice
     function computerPlay() {
       let num = Math.floor(Math.random() * 3) + 1;
@@ -19,48 +61,46 @@
     }
 
     // One round of Scissors Paper Rock
-    function playRound(playerSelection, computerSelection) {
-      let computer = computerSelection.slice(0);
-      let player = playerSelection.slice(0).toLowerCase();
+    function playRound(playerSelection) {
+      let computer = computerPlay().slice(0);
+      let player = playerSelection.target.id;
 
-      return player === computerSelection ? "Looks like you've got yourself a tie"
+      let result = player === computer ? "Looks like you've got yourself a tie"
         : player == 'paper' && computer == 'scissors'
           || player == 'scissors' && computer == 'rock'
           || player == 'rock' && computer == 'paper'
-          ? `Oops, you lost, ${computer} beats ${player}`
-          : `Victory, ${player} beats ${computer}`
+          ? `Oops, better luck next round, ${computer} beats ${player}`
+          : `Nice, putting points on the board, ${player} beats ${computer}`
+
+      playerOutput.textContent = ` ${player}`;
+      computerOutput.textContent = ` ${computer}`;
+      message.textContent = result;
+      updateScore(result);
     }
 
-    // If player wins increase score by 1 if computer wins decrease score by 1
-    function incrementScore(result) {
-      return result.charAt(0) == 'V' ? 1
-        : result.charAt(0) == 'O' ? -1
-          : 0;
+    // Determine which score to increment
+    function updateScore(result) {
+      return result.charAt(0) == 'N' ? increaseScore(playersScore, 'Player')
+        : result.charAt(0) == 'O' ? increaseScore(computersScore, 'Computer')
+          : null;
     }
 
-    // Track player's score over multiple rounds
-    function runRounds(numberOfRounds) {
-      let score = 0;
-
-      for (let i = 0; i < numberOfRounds; i++) {
-        const playerSelection = prompt(
-          'Pick your weapon. Please type either "rock", "paper" or "scissors" and hit enter.'
-        );
-        let result = playRound(playerSelection, computerPlay());
-        score += incrementScore(result);
-        console.log(result);
+    // Increment winner's score by 1
+    function increaseScore(winner, name) {
+      if (winner.textContent == '4') {
+        message.textContent = `${name} Wins!`;
+        message.classList.add('end');
+        playersScore.textContent = '0';
+        computersScore.textContent = '0';
+      } else {
+        message.classList.remove('end');
+        winner.textContent = parseInt(winner.textContent) + 1;
       }
-      return score;
+
+
     }
 
-    // Determine winner of multiple rounds
-    function game(numberOfRounds) {
-      let score = runRounds(numberOfRounds);
-      return score > 0 ? 'Winner' : 'Looser!';
-    }
-
-
-    console.log(game(5));
+    buttons.forEach(btn => btn.addEventListener('click', playRound));
   </script>
 </body>
 
