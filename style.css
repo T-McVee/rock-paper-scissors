@@ -111,6 +111,10 @@ ul {
   margin: 0 2em 1em;
 }
 
+.outputs .score  span {
+  margin: 0 8em;
+}
+
 .block {
   display: block;
 }
